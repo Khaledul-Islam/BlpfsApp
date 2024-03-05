@@ -1,47 +1,38 @@
 // LoginScreen.jsx
-import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
+import Loader from '../Components/Loader';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
-      // Validate input fields
-      if (!username || !password) {
-        alert('Please enter both username and password.');
-        return;
-      }
+      // if (!username || !password) {
+      //   alert('Please enter both username and password.');
+      //   return;
+      // }
 
-      // API endpoint and base URL
       const apiUrl = 'user/ApiLogin';
-      const baseUrl = 'https://localhost:44309/';
-
-      // Make API call using Axios
+      const baseUrl = 'http://172.16.231.79/';
+      setLoading(true);
       const response = await axios.post(`${baseUrl}${apiUrl}`, {
-        Username: username,
-        Password: password,
-        RememberMe: true,
-        CheckoutAsGuest: false,
-        Email: 'k.islam@blmanagedservices.com',
-        UsernamesEnabled: true,
-        RegistrationType: 1,
-        DisplayCaptcha: false,
+        email: 'k.islam@blmanagedservices.com',
+        password: '12345',
       });
-
-      // Check the API response
-      if (response) {
-        // Navigate to the dashboard or homepage on successful login
+      if (response.data.IsAuthenticated) {
         navigation.navigate('Home');
       } else {
-        // Handle unsuccessful login (show an error message)
         alert('Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Error during login:', error);
       alert('An error occurred during login. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,16 +43,17 @@ const LoginScreen = ({navigation}) => {
         style={styles.input}
         placeholder="Username"
         value={username}
-        onChangeText={text => setUsername(text)}
+        onChangeText={(text) => setUsername(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         secureTextEntry
         value={password}
-        onChangeText={text => setPassword(text)}
+        onChangeText={(text) => setPassword(text)}
       />
       <Button title="Login" onPress={handleLogin} />
+      {loading && <Loader loading={loading} />}
     </View>
   );
 };
