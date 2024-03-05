@@ -19,18 +19,17 @@ const LoginScreen = ({navigation}) => {
       const apiUrl = 'user/ApiLogin';
       const baseUrl = 'https://localhost:44309/';
 
-      // Make API call using Axios
+      //Make API call using Axios
       const response = await axios.post(`${baseUrl}${apiUrl}`, {
-        Username: username,
-        Password: password,
-        RememberMe: true,
-        CheckoutAsGuest: false,
-        Email: 'k.islam@blmanagedservices.com',
-        UsernamesEnabled: true,
-        RegistrationType: 1,
-        DisplayCaptcha: false,
+          Username: username,
+          Password: password,
+          RememberMe: true,
+          CheckoutAsGuest: false,
+          Email: 'k.islam@blmanagedservices.com',
+          UsernamesEnabled: true,
+          RegistrationType: 1,
+          DisplayCaptcha: false,
       });
-
       // Check the API response
       if (response) {
         // Navigate to the dashboard or homepage on successful login
@@ -76,6 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color:'black'
   },
   input: {
     height: 40,
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingLeft: 10,
+    color:'black',    
   },
 });
 
