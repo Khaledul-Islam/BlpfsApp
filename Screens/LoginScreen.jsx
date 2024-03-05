@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color:'black'
   },
   input: {
     height: 40,
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
     paddingLeft: 10,
+    color:'black',    
   },
 });
 

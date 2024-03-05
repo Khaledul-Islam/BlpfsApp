@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const DrawerList = [
   {icon: 'home-outline', label: 'HomePage', navigateTo: 'Home'},
 ];
+
 const DrawerLayout = ({icon, label, navigateTo}) => {
   const navigation = useNavigation();
   // console.log(userData);
@@ -36,6 +37,7 @@ const DrawerItems = props => {
     });
   };
 function DrawerContent(props) {
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -70,7 +72,9 @@ function DrawerContent(props) {
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
-        />
+          onPress={()=>{
+            navigation.navigate('Login');
+          }}/>
       </View>
     </View>
   );
