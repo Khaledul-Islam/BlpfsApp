@@ -2,8 +2,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
-import LoginScreen from './Screens/LoginScreen';
-import HomeScreen from './Screens/HomeScreen';
+import LoginScreen from '../Screens/LoginScreen';
+import HomeScreen from '../Screens/HomeScreen';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const StackNav = () => {
