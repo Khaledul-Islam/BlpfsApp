@@ -28,7 +28,11 @@ const LoginScreen = ({ navigation }) => {
         });
         navigation.navigate('Home');
       } else {
-        alert('Invalid credentials. Please try again.');
+        Toast.show({
+          type:'error',
+          text1:'Error',
+          text2:'Invalid credentials. Please try again.',        
+        })
       }
     } catch (error) {
       Toast.show({
