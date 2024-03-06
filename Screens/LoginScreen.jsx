@@ -17,8 +17,8 @@ const LoginScreen = ({ navigation }) => {
       const baseUrl = 'http://172.16.231.94/';
       setLoading(true);
       const response = await axios.post(`${baseUrl}${apiUrl}`, {
-        email: 'k.islam@blmanagedservices.com',
-        password: '12345',
+        email: 'admin@pfs.com',
+        password: 'BL@12345',
       });
       if (response.data.IsAuthenticated) {
         authDispatch({
