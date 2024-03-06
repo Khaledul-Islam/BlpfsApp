@@ -4,6 +4,7 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Loader from '../Components/Loader';
 import { useAuthDispatch } from '../Navigation/AuthContext';
+import Toast from 'react-native-toast-message';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -30,7 +31,11 @@ const LoginScreen = ({ navigation }) => {
         alert('Invalid credentials. Please try again.');
       }
     } catch (error) {
-      alert('An error occurred during login. Please try again.');
+      Toast.show({
+        type:'error',
+        text1:'Error',
+        text2:'An error occurred during login. Please try again.',        
+      })
     } finally {
       setLoading(false);
     }
