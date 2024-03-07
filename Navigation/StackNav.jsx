@@ -11,7 +11,6 @@ const StackNav = () => {
   const navigation = useNavigation();
 
   const openDrawer = () => {
-    // Use DrawerActions to open the drawer
     navigation.dispatch(DrawerActions.toggleDrawer());
   };
 
@@ -28,7 +27,7 @@ const StackNav = () => {
         name='Home'
         component={HomeScreen}
         options={{
-          title: 'HomePage',
+          title: 'Menu',
           headerStyle: {
             backgroundColor: 'orange',
           },

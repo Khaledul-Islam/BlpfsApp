@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthState } from './AuthContext';
 
@@ -10,9 +10,16 @@ const DrawerContent = (props) => {
   const navigation = useNavigation();
   const authState = useAuthState();
   const [openMenu, setOpenMenu] = useState('');
+  const [clickedChild, setClickedChild] = useState('');
 
   const handleToggleMenu = (rootSystemName) => {
-    setOpenMenu((prevOpenMenu) => (prevOpenMenu === rootSystemName ? '' : rootSystemName));
+    setOpenMenu((prevOpenMenu) =>
+      prevOpenMenu === rootSystemName ? '' : rootSystemName
+    );
+  };
+
+  const handleChildItemClick = (childTitle) => {
+    setClickedChild(childTitle);
   };
 
   const renderMenuItems = () => {
@@ -24,29 +31,61 @@ const DrawerContent = (props) => {
           }}
         >
           <View style={styles.menuItemContent}>
-            <Text style={[styles.menuItemText, { fontWeight: openMenu === rootNode.RootSystemName ? 'bold' : 'normal' }]}>
-              {rootNode.RootTitle}
+            <Text
+              style={[
+                styles.menuItemText,
+                {
+                  fontWeight:
+                    openMenu === rootNode.RootSystemName ? 'bold' : 'normal',
+                },
+              ]}
+            >
+              <Icon name={rootNode.RootIcon} size={15}></Icon> {rootNode.RootTitle}
             </Text>
             <Icon
-              name={openMenu === rootNode.RootSystemName ? 'chevron-down' : 'chevron-right'}
+              name={
+                openMenu === rootNode.RootSystemName
+                  ? 'chevron-down'
+                  : 'chevron-right'
+              }
               style={styles.menuItemIcon}
             />
           </View>
         </TouchableOpacity>
-        {openMenu === rootNode.RootSystemName && rootNode.ChildNodes && rootNode.ChildNodes.length > 0 && (
-          <View style={styles.childContainer}>
-            {rootNode.ChildNodes.map((childNode, childIndex) => (
-              <DrawerItem
-                key={childIndex}
-                label={childNode.ChildTitle}
-                onPress={() => {
-                  navigation.navigate('Home');
-                }}
-                style={styles.childItem}
-              />
-            ))}
-          </View>
-        )}
+        {openMenu === rootNode.RootSystemName &&
+          rootNode.ChildNodes &&
+          rootNode.ChildNodes.length > 0 && (
+            <View style={styles.childContainer}>
+              {rootNode.ChildNodes.map((childNode, childIndex) => (
+                <DrawerItem
+                  key={childIndex}
+                  label={() => (
+                    <View>
+                      <Text
+                        style={[
+                          styles.childItemText,
+                          {
+                            fontWeight:
+                              clickedChild === childNode.ChildTitle
+                                ? 'bold'
+                                : 'normal',
+                          },
+                        ]}
+                      >
+                        <Icon name={childNode.ChildIcon} size={12} />{' '}
+                        {childNode.ChildTitle}
+                      </Text>
+                    </View>
+                  )}
+                  onPress={() => {
+                    handleChildItemClick(childNode.ChildTitle);
+                    navigation.navigate('Home');
+                  }}
+                  style={styles.childItem}
+                />
+              ))}
+            </View>
+          )}
       </View>
     ));
   };
@@ -73,30 +112,33 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   menuItem: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 3,
     borderBottomColor: '#ddd',
   },
   menuItemContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
   },
   menuItemIcon: {
     fontSize: 20,
     color: '#555',
   },
   menuItemText: {
-    fontSize: 16,
+    fontSize: 15,
     color: '#333',
   },
   childContainer: {
-    marginLeft: 30,
+    marginLeft: 15,
   },
   childItem: {
-    marginLeft: 10,
-    borderBottomWidth: 0, // Remove the bottom border for child items
+    marginLeft: 15,
+  },
+  childItemText: {
+    fontSize: 15,
+    color: '#555',
   },
 });
 
