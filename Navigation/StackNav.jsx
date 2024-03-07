@@ -7,7 +7,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const StackNav = () => {
-  const stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
 
   const openDrawer = () => {
@@ -15,15 +15,15 @@ const StackNav = () => {
   };
 
   return (
-    <stack.Navigator initialRouteName='Login'>
-      <stack.Screen
+    <Stack.Navigator initialRouteName='Login'>
+      <Stack.Screen
         name='Login'
         component={LoginScreen}
         options={{
           title: 'Login',
         }}
       />
-      <stack.Screen
+      <Stack.Screen
         name='Home'
         component={HomeScreen}
         options={{
@@ -42,7 +42,7 @@ const StackNav = () => {
           ),
         }}
       />
-    </stack.Navigator>
+    </Stack.Navigator>
   );
 };
 
