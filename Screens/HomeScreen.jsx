@@ -5,7 +5,6 @@ function HomeScreen (props){
   return (
     <View style={styles.viewStyle}>
       <Text style={{color:'black', fontSize:30,alignItems:'center', textAlign:'center'}}> PFS</Text>
-      {/* <Button title='User' onPress={()=>props.navigation.navigate("User")}/> */}
     </View>
   )}
 
