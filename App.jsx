@@ -5,7 +5,9 @@ import DrawerNav from './Navigation/DrawerNav'; // Adjust the path based on your
 import { AuthProvider } from './Navigation/AuthContext'; 
 import Toast from 'react-native-toast-message';
 import ToastConfig from './Components/ToastConfig';
+import {LogBox } from 'react-native';
 
+LogBox.ignoreLogs(['Reanimated 2']);
 const App = () => {
   return (
     <AuthProvider>
