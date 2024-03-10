@@ -27,7 +27,7 @@ const StackNav = () => {
         name='Home'
         component={HomeScreen}
         options={{
-          title: 'Menu',
+          title: '',
           headerStyle: {
             backgroundColor: 'orange',
           },
