@@ -10,7 +10,7 @@ const HomeScreen = (props) => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Tab1"
+        name="Home"
         component={Tab1Screen}
         options={{
           tabBarLabel: 'Home',
@@ -20,32 +20,32 @@ const HomeScreen = (props) => {
         }}
       />
       <Tab.Screen
-        name="Tab2"
+        name="Parking"
         component={Tab2Screen}
         options={{
-          tabBarLabel: 'User',
+          tabBarLabel: 'Parking',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="user" color={color} size={size} />
+            <Icon name="car" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Tab3"
+        name="Cafeteria"
         component={Tab3Screen}
         options={{
-          tabBarLabel: 'Settings',
+          tabBarLabel: 'Cafeteria',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="cogs" color={color} size={size} />
+            <Icon name="cutlery" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Tab4"
+        name="Ticket"
         component={Tab4Screen}
         options={{
-          tabBarLabel: 'Notification',
+          tabBarLabel: 'Ticket',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="bell" color={color} size={size} />
+            <Icon name="ticket" color={color} size={size} />
           ),
         }}
       />
