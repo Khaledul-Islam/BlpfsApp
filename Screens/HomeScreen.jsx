@@ -86,12 +86,12 @@ const HomeScreen = (props) => {
         }}
       />
       <Tab.Screen
-        name="Ticket"
+        name="Profile"
         component={Tab4Screen}
         options={{
-          tabBarLabel: 'Ticket',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="ticket" color={color} size={size} />
+            <Icon name="user" color={color} size={size} />
           ),
         }}
       />
