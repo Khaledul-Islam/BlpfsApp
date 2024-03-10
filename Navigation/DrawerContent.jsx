@@ -1,6 +1,6 @@
 // DrawerContent.jsx
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -23,104 +23,71 @@ const DrawerContent = (props) => {
   };
 
   const renderMenuItems = () => {
-    return (
-      <ScrollView>
-        {/* "Default" item */}
-        <DrawerItem
-          label={() => (
-            <View>
-              <Text style={styles.defaultItemText}>
-                <Icon name="star" size={15} /> Menu
-              </Text>
-            </View>
-          )}
-          style={styles.defaultItem}
-        />
-
-        {/* Dynamic menu items */}
-        {authState.DynamicMenu.map((rootNode, index) => (
-          <View key={index} style={styles.menuItem}>
-            <TouchableOpacity
-              onPress={() => {
-                handleToggleMenu(rootNode.RootSystemName);
-              }}
-            >
-              <View style={styles.menuItemContent}>
-                <Text
-                  style={[
-                    styles.menuItemText,
-                    {
-                      fontWeight:
-                        openMenu === rootNode.RootSystemName ? 'bold' : 'normal',
-                    },
-                  ]}
-                >
-                  <Icon name={rootNode.RootIcon} size={15}></Icon> {rootNode.RootTitle}
-                </Text>
-                <Icon
-                  name={
-                    openMenu === rootNode.RootSystemName
-                      ? 'chevron-down'
-                      : 'chevron-right'
-                  }
-                  style={styles.menuItemIcon}
-                />
-              </View>
-            </TouchableOpacity>
-            {openMenu === rootNode.RootSystemName &&
-              rootNode.ChildNodes &&
-              rootNode.ChildNodes.length > 0 && (
-                <View style={styles.childContainer}>
-                  {rootNode.ChildNodes.map((childNode, childIndex) => (
-                    <DrawerItem
-                      key={childIndex}
-                      label={() => (
-                        <View>
-                          <Text
-                            style={[
-                              styles.childItemText,
-                              {
-                                fontWeight:
-                                  clickedChild === childNode.ChildTitle
-                                    ? 'bold'
-                                    : 'normal',
-                              },
-                            ]}
-                          >
-                            <Icon name={childNode.ChildIcon} size={12} />{' '}
-                            {childNode.ChildTitle}
-                          </Text>
-                        </View>
-                      )}
-                      onPress={() => {
-                        handleChildItemClick(childNode.ChildTitle);
-                        navigation.navigate('Home');
-                      }}
-                      style={styles.childItem}
-                    />
-                  ))}
-                </View>
-              )}
-          </View>
-        ))}
-
-        {/* "Sign Out" item */}
-        <DrawerItem
-          label={() => (
-            <View>
-              <Text style={styles.signOutItemText}>
-                <Icon name="sign-out" size={15} /> Sign Out
-              </Text>
-            </View>
-          )}
+    return authState.DynamicMenu.map((rootNode, index) => (
+      <View key={index} style={styles.menuItem}>
+        <TouchableOpacity
           onPress={() => {
-            // Handle sign out
-            // Example: authDispatch({ type: 'LOGOUT' });
+            handleToggleMenu(rootNode.RootSystemName);
           }}
-          style={styles.signOutItem}
-        />
-      </ScrollView>
-    );
+        >
+          <View style={styles.menuItemContent}>
+            <Text
+              style={[
+                styles.menuItemText,
+                {
+                  fontWeight:
+                    openMenu === rootNode.RootSystemName ? 'bold' : 'normal',
+                },
+              ]}
+            >
+              <Icon name={rootNode.RootIcon} size={15}></Icon> {rootNode.RootTitle}
+            </Text>
+            <Icon
+              name={
+                openMenu === rootNode.RootSystemName
+                  ? 'chevron-down'
+                  : 'chevron-right'
+              }
+              style={styles.menuItemIcon}
+            />
+          </View>
+        </TouchableOpacity>
+        {openMenu === rootNode.RootSystemName &&
+          rootNode.ChildNodes &&
+          rootNode.ChildNodes.length > 0 && (
+            <View style={styles.childContainer}>
+              {rootNode.ChildNodes.map((childNode, childIndex) => (
+                <DrawerItem
+                  key={childIndex}
+                  label={() => (
+                    <View>
+                      <Text
+                        style={[
+                          styles.childItemText,
+                          {
+                            fontWeight:
+                              clickedChild === childNode.ChildTitle
+                                ? 'bold'
+                                : 'normal',
+                          },
+                        ]}
+                      >
+                        <Icon name={childNode.ChildIcon} size={12} />{' '}
+                        {childNode.ChildTitle}
+                      </Text>
+                    </View>
+                  )}
+                  onPress={() => {
+                    handleChildItemClick(childNode.ChildTitle);
+                    navigation.navigate('Home');
+                  }}
+                  style={styles.childItem}
+                />
+              ))}
+            </View>
+          )}
+      </View>
+    ));
   };
 
   return (
@@ -172,26 +139,6 @@ const styles = StyleSheet.create({
   childItemText: {
     fontSize: 15,
     color: '#555',
-  },
-  defaultItem: {
-    marginTop: 10,
-    borderBottomWidth: 3,
-    borderBottomColor: '#ddd',
-  },
-  defaultItemText: {
-    fontSize: 15,
-    color: '#333',
-    fontWeight: 'bold',
-  },
-  signOutItem: {
-    marginTop: 10,
-    borderBottomWidth: 3,
-    borderBottomColor: '#ddd',
-  },
-  signOutItemText: {
-    fontSize: 15,
-    color: '#d9534f', // Bootstrap's danger color for red
-    fontWeight: 'bold',
   },
 });
 
