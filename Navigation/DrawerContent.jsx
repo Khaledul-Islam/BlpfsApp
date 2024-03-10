@@ -140,6 +140,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#555',
   },
+  signoutButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    padding: 10,
+  },
 });
 
 export default DrawerContent;

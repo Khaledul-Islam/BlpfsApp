@@ -5,6 +5,7 @@ import axios from 'axios';
 import Loader from '../Components/Loader';
 import { useAuthDispatch } from '../Navigation/AuthContext';
 import Toast from 'react-native-toast-message';
+import appConfig from '../app.json';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       const apiUrl = 'user/ApiLogin';
-      const baseUrl = 'http://172.16.231.94/';
+      const baseUrl = appConfig.apiBaseURL; 
       setLoading(true);
       const response = await axios.post(`${baseUrl}${apiUrl}`, {
         email: 'admin@pfs.com',
