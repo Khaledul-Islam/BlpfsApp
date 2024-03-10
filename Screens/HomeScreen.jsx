@@ -56,10 +56,10 @@ const HomeScreen = (props) => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="Dashboard"
         component={Tab1Screen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Dashboard',
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" color={color} size={size} />
           ),
@@ -86,12 +86,12 @@ const HomeScreen = (props) => {
         }}
       />
       <Tab.Screen
-        name="Ticket"
+        name="Profile"
         component={Tab4Screen}
         options={{
-          tabBarLabel: 'Ticket',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="ticket" color={color} size={size} />
+            <Icon name="user" color={color} size={size} />
           ),
         }}
       />
