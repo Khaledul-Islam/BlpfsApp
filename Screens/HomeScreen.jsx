@@ -1,12 +1,58 @@
 // HomeScreen.jsx
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, StyleSheet, BackHandler, Alert, Platform } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = (props) => {
+  //for Android
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Exit App', 'Do you want to exit?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {
+          text: 'Exit',
+          onPress: () => BackHandler.exitApp(),
+        },
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  // for iOS
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        props.navigation.goBack();
+        return true;
+      };
+
+      if (Platform.OS === 'ios') {
+        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      }
+
+      return () => {
+        if (Platform.OS === 'ios') {
+          BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }
+      };
+    }, [props.navigation])
+  );
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -81,7 +127,7 @@ const styles = StyleSheet.create({
   tabContent: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });
 
