@@ -56,10 +56,10 @@ const HomeScreen = (props) => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="Dashboard"
         component={Tab1Screen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Dashboard',
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" color={color} size={size} />
           ),
