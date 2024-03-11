@@ -27,9 +27,9 @@ export default function DataTable() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://mocki.io/v1/08f16503-84db-4143-aefb-7c328de604cb?page=${page}`);
-      const newData = response.data.results; // Assuming results is the array containing the data
-      setPets([...pets, ...newData]);
+      const response = await axios.get(`https://mocki.io/v1/7ab5400f-ef28-4d39-8302-9cdfa632920f?page=${page}`);
+      const newData = response.data; // Assuming results is the array containing the data
+      setPets(prevPets => [...prevPets, ...newData]);
       setPage(page + 1);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -48,7 +48,7 @@ export default function DataTable() {
   const handleSearch = (query) => {
     setSearchQuery(query);
     const filteredData = pets.filter((pet) =>
-      pet.Name.toLowerCase().includes(query.toLowerCase())
+      pet.Name.toLowerCase().includes(query.toLowerCase()) || pet.Breed.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredPets(filteredData);
   };
