@@ -1,13 +1,13 @@
 // LoginScreen.jsx
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import axios from 'axios';
 import Loader from '../Components/Loader';
-import { useAuthDispatch } from '../Navigation/AuthContext';
+import {useAuthDispatch} from '../Navigation/AuthContext';
 import Toast from 'react-native-toast-message';
 import appConfig from '../app.json';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       const apiUrl = 'user/ApiLogin';
-      const baseUrl = appConfig.apiBaseURL; 
+      const baseUrl = appConfig.apiBaseURL;
       setLoading(true);
       const response = await axios.post(`${baseUrl}${apiUrl}`, {
         email: 'admin@pfs.com',
@@ -30,17 +30,17 @@ const LoginScreen = ({ navigation }) => {
         navigation.navigate('Home');
       } else {
         Toast.show({
-          type:'error',
-          text1:'Error',
-          text2:'Invalid credentials. Please try again.',        
-        })
+          type: 'error',
+          text1: 'Error',
+          text2: 'Invalid credentials. Please try again.',
+        });
       }
     } catch (error) {
       Toast.show({
-        type:'error',
-        text1:'Error',
-        text2:'An error occurred during login. Please try again.',        
-      })
+        type: 'error',
+        text1: 'Error',
+        text2: 'An error occurred during login. Please try again.',
+      });
     } finally {
       setLoading(false);
     }
@@ -53,14 +53,14 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         placeholder="Username"
         value={username}
-        onChangeText={(text) => setUsername(text)}
+        onChangeText={text => setUsername(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         secureTextEntry
         value={password}
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={text => setPassword(text)}
       />
       <Button title="Login" onPress={handleLogin} />
       {loading && <Loader loading={loading} />}
