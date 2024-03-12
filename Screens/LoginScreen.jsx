@@ -4,7 +4,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   image: {
-    marginBottom: 40,
+    marginBottom: 30,
   },
   inputView: {
     backgroundColor: '#FAF9F9',
@@ -123,8 +122,12 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#4ab2f1',
+    backgroundColor: '#E66605',
   },
+  loginText:{
+    color:'black',
+    fontWeight:'bold'
+  }
 });
 
 export default LoginScreen;
