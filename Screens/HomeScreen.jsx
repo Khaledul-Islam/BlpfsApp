@@ -4,6 +4,8 @@ import { Text, View, StyleSheet, BackHandler, Alert, Platform } from 'react-nati
 import { useFocusEffect } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import DataTable from '../Components/DataTable';
+import InBoundList from '../Screens/InboundList';
 
 const Tab = createBottomTabNavigator();
 
@@ -100,9 +102,13 @@ const HomeScreen = (props) => {
 };
 
 const Tab1Screen = () => (
-  <View style={styles.tabContent}>
-    <Text>Tab 1 Content</Text>
-  </View>
+  // <View style={styles.tabContent}>
+  //   <Text>Tab 1 Content</Text>
+  // </View>
+ 
+<InBoundList />
+
+
 );
 
 const Tab2Screen = () => (
