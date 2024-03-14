@@ -1,24 +1,24 @@
 // DrawerContent.jsx
-import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import React, {useState} from 'react';
+import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
-import { useAuthState } from './AuthContext';
+import {useNavigation} from '@react-navigation/native';
+import {useAuthState} from './AuthContext';
 
-const DrawerContent = (props) => {
+const DrawerContent = props => {
   const navigation = useNavigation();
   const authState = useAuthState();
   const [openMenu, setOpenMenu] = useState('');
   const [clickedChild, setClickedChild] = useState('');
 
-  const handleToggleMenu = (rootSystemName) => {
-    setOpenMenu((prevOpenMenu) =>
-      prevOpenMenu === rootSystemName ? '' : rootSystemName
+  const handleToggleMenu = rootSystemName => {
+    setOpenMenu(prevOpenMenu =>
+      prevOpenMenu === rootSystemName ? '' : rootSystemName,
     );
   };
 
-  const handleChildItemClick = (childTitle) => {
+  const handleChildItemClick = childTitle => {
     setClickedChild(childTitle);
   };
 
@@ -28,8 +28,7 @@ const DrawerContent = (props) => {
         <TouchableOpacity
           onPress={() => {
             handleToggleMenu(rootNode.RootSystemName);
-          }}
-        >
+          }}>
           <View style={styles.menuItemContent}>
             <Text
               style={[
@@ -38,9 +37,9 @@ const DrawerContent = (props) => {
                   fontWeight:
                     openMenu === rootNode.RootSystemName ? 'bold' : 'normal',
                 },
-              ]}
-            >
-              <Icon name={rootNode.RootIcon} size={15}></Icon> {rootNode.RootTitle}
+              ]}>
+              <Icon name={rootNode.RootIcon} size={15}></Icon>{' '}
+              {rootNode.RootTitle}
             </Text>
             <Icon
               name={
@@ -70,8 +69,7 @@ const DrawerContent = (props) => {
                                 ? 'bold'
                                 : 'normal',
                           },
-                        ]}
-                      >
+                        ]}>
                         <Icon name={childNode.ChildIcon} size={12} />{' '}
                         {childNode.ChildTitle}
                       </Text>
@@ -79,7 +77,7 @@ const DrawerContent = (props) => {
                   )}
                   onPress={() => {
                     handleChildItemClick(childNode.ChildTitle);
-                    navigation.navigate('Home');
+                    navigation.navigate(childNode.ChildUrl);
                   }}
                   style={styles.childItem}
                 />
